@@ -8,16 +8,20 @@
 
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/']" routerLinkActive="active">Yogahuse <span class="sr-only">(current)</span></a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/employeer']">Yogahuse <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/teachers']" routerLinkActive="active">Undervisere</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/teachers']">Undervisere</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/guests']" routerLinkActive="active">Gæster</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/guests']">Gæster</a>
         </li>
       </ul>
+    </div>
+    <div class="form-inline">
+      <a class="btn btn-secondary my-2 my-sm-0 text-dark" [routerLink]="['/settings']"><i class="fa fa-cog"></i>
+        Indstillinger</a>
     </div>
   </div>
 </nav>

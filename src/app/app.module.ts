@@ -13,6 +13,10 @@ import { HomeComponent } from './home/home.component';
 import { appRoutes } from './routes';
 import { TeachersComponent } from './teachers/teachers.component';
 import { GuestsComponent } from './guests/guests.component';
+import { CustomerStatusService } from 'src/_services/customer-status.service';
+import { AlertifyService } from '../_services/alertify.service';
+import { SettingsComponent } from './settings/settings.component';
+import { CustomerStatusComponent } from './settings/customer-status/customer-status.component';
 
 @NgModule({
    declarations: [
@@ -20,7 +24,9 @@ import { GuestsComponent } from './guests/guests.component';
       NavComponent,
       HomeComponent,
       TeachersComponent,
-      GuestsComponent
+      GuestsComponent,
+      SettingsComponent,
+      CustomerStatusComponent
    ],
    imports: [
       BrowserModule,
@@ -34,7 +40,10 @@ import { GuestsComponent } from './guests/guests.component';
       TabsModule.forRoot(),
       RouterModule.forRoot(appRoutes)
    ],
-   providers: [],
+   providers: [
+      CustomerStatusService,
+      AlertifyService
+   ],
    bootstrap: [
       AppComponent
    ]

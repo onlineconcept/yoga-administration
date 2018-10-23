@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-12">
+    <h2>Customer Statuses</h2><br>
+  </div>
+  <div class="col-8 mb-3">
+
+    <form #editForm="ngForm" id="editForm" (ngSubmit)="addCustomerStatus()">
+      <div class="row">
+        <div class="col-3">
+          <label class="mt-2">Customer status</label>
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Name" name="name" [(ngModel)]="customerStatus.name">
+        </div>
+        <div class="col">
+          <input type="number" class="form-control" placeholder="Price" name="price" [(ngModel)]="customerStatus.price">
+        </div>
+        <div class="col">
+          <button class="btn btn-primary" type="submit">Create Customer Status</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-12">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cs of customerStatuses">
+          <th scope="row">{{cs.id}}</th>
+          <td>{{cs.name}}</td>
+          <td>{{cs.price}}</td>
+          <td align="right">
+            <button type="button" class="btn btn-secondary mr-2" (click)="editCustomerStatus(cs.id)"><i class="fa fa-cog"></i>
+              Edit</button>
+            <button type="button" class="btn btn-danger mr-2" (click)="deleteCustomerStatus(cs.id)"><i class="fa fa-trash"></i>
+              Delete</button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>

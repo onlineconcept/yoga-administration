@@ -2,10 +2,12 @@ import {Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { TeachersComponent } from './teachers/teachers.component';
 import { GuestsComponent } from './guests/guests.component';
+import { SettingsComponent } from './settings/settings.component';
 export const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
   {path: 'teachers', component: TeachersComponent},
   {path: 'guests', component: GuestsComponent},
+  {path: 'settings', component: SettingsComponent},
+  {path: 'employeer', component: HomeComponent},
   // {
   //     path: '',
   //     runGuardsAndResolvers: 'always',
@@ -21,5 +23,5 @@ export const appRoutes: Routes = [
   //         {path: 'lists', component: ListsComponent, resolve: {users: ListsResolver}},
   //     ]
   // },
-  {path: '**', redirectTo: 'home', pathMatch: 'full'},
+  {path: '**', redirectTo: 'employeer', pathMatch: 'full'},
 ];

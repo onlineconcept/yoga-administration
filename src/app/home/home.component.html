@@ -10,18 +10,11 @@
     <div class="form-group row">
       <label class="col-sm-2 col-form-label">Kundestatus</label>
       <div class="col-sm-10">
-        <div class="form-check form-check-inline mt-2">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-          <label class="form-check-label" for="inlineCheckbox1">1</label>
+        <div class="form-check form-check-inline mt-2" *ngFor="let cs of customerStatuses">
+          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" [value]="cs.id">
+          <label class="form-check-label" for="inlineCheckbox1">{{cs.name}}</label>
         </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-          <label class="form-check-label" for="inlineCheckbox2">2</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-          <label class="form-check-label" for="inlineCheckbox3">3</label>
-        </div>
+
       </div>
     </div>
     <div class="form-group row">
@@ -190,37 +183,6 @@
 <div *ngIf="!showFilters">
   <table class="table">
     <thead class="thead-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <table class="table">
-    <thead class="thead-light">
       <tr>
         <th scope="col">#</th>
         <th scope="col">First</th>
