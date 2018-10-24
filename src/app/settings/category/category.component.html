@@ -1,0 +1,46 @@
+<div class="row mt-5">
+  <div class="col-12">
+    <h2>Categories</h2><br>
+  </div>
+  <div class="col-8 mb-3">
+
+    <form #editForm="ngForm" id="editForm" (ngSubmit)="addCategory()">
+      <div class="row">
+        <div class="col-3">
+          <label class="mt-2">Category Name</label>
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" placeholder="Name" name="name" [(ngModel)]="category.name">
+        </div>
+        <div class="col">
+          <button class="btn btn-primary" type="submit">Create Category</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-12">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of categories">
+          <th scope="row">{{c.id}}</th>
+          <td>{{c.name}}</td>
+
+          <td align="right">
+            <button type="button" class="btn btn-secondary mr-2" (click)="editCategory(c.id)"><i class="fa fa-cog"></i>
+              Edit</button>
+            <button type="button" class="btn btn-danger mr-2" (click)="deleteCategory(c.id)"><i class="fa fa-trash"></i>
+              Delete</button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>

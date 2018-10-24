@@ -17,6 +17,8 @@ import { CustomerStatusService } from 'src/_services/customer-status.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { SettingsComponent } from './settings/settings.component';
 import { CustomerStatusComponent } from './settings/customer-status/customer-status.component';
+import { CategoryComponent } from './settings/category/category.component';
+import { CategoryService } from 'src/_services/category.service';
 
 @NgModule({
    declarations: [
@@ -26,7 +28,8 @@ import { CustomerStatusComponent } from './settings/customer-status/customer-sta
       TeachersComponent,
       GuestsComponent,
       SettingsComponent,
-      CustomerStatusComponent
+      CustomerStatusComponent,
+      CategoryComponent
    ],
    imports: [
       BrowserModule,
@@ -42,6 +45,7 @@ import { CustomerStatusComponent } from './settings/customer-status/customer-sta
    ],
    providers: [
       CustomerStatusService,
+      CategoryService,
       AlertifyService
    ],
    bootstrap: [
