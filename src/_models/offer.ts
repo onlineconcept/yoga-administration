@@ -1,4 +1,4 @@
-export interface Category {
+export interface Offer {
   id: string;
   name: string;
 }

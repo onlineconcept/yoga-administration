@@ -14,15 +14,15 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   getCategories() {
-    return this.http.get<Category[]>(this.baseUrl + 'category');
+    return this.http.get<Category[]>(this.baseUrl + 'categories');
   }
   createCategory(category: Category): Observable<Category> {
-    return this.http.post<Category>(this.baseUrl + 'category', category);
+    return this.http.post<Category>(this.baseUrl + 'categories', category);
   }
-  editCategory(id: number, category: Category): Observable<Category> {
-    return this.http.put<Category>(this.baseUrl + 'category/' + id, category);
+  editCategory(id: string, category: Category): Observable<Category> {
+    return this.http.put<Category>(this.baseUrl + 'categories/' + id, category);
   }
-  deleteCategory(id: number) {
-    return this.http.delete(this.baseUrl + 'category/' + id);
+  deleteCategory(id: string) {
+    return this.http.delete(this.baseUrl + 'categories/' + id);
   }
 }

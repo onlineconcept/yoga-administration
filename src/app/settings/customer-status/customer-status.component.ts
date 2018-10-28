@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
 })
 export class CustomerStatusComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
-  customerStatus: CustomerStatus = {id: 0, name: '', price: 0};
+  customerStatus: CustomerStatus = {id: '', name: '', price: 0};
   baseUrl = environment.apiUrl;
   customerStatuses: CustomerStatus[];
   constructor( private alertify: AlertifyService, private customerStatusService: CustomerStatusService) { }
@@ -42,7 +42,7 @@ export class CustomerStatusComponent implements OnInit {
 
   deleteCustomerStatus(id) {
     this.customerStatusService.deleteStatus(id).subscribe(() => {
-      this.customerStatuses.splice(this.customerStatuses.findIndex(p=> p.id === id), 1);
+      this.customerStatuses.splice(this.customerStatuses.findIndex(p => p.id === id), 1);
       this.alertify.success('Customer status deleted Successfully');
     }, err => this.alertify.error(err));
   }

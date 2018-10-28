@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
 })
 export class CategoryComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
-  category: Category = {id: 0, name: ''};
+  category: Category = {id: '', name: ''};
   baseUrl = environment.apiUrl;
   categories: Category[];
   constructor( private alertify: AlertifyService, private categoryService: CategoryService) { }

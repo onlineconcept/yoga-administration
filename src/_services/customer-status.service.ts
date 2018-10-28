@@ -13,15 +13,15 @@ export class CustomerStatusService {
   constructor(private http: HttpClient) { }
 
   getStatuses() {
-    return this.http.get<CustomerStatus[]>(this.baseUrl + 'customerstatus');
+    return this.http.get<CustomerStatus[]>(this.baseUrl + 'customerstatuses');
   }
   createStatus(customerStatus: CustomerStatus): Observable<CustomerStatus> {
-    return this.http.post<CustomerStatus>(this.baseUrl + 'customerstatus', customerStatus);
+    return this.http.post<CustomerStatus>(this.baseUrl + 'customerstatuses', customerStatus);
   }
-  editStatus(id: number, customerStatus: CustomerStatus): Observable<CustomerStatus> {
-    return this.http.put<CustomerStatus>(this.baseUrl + 'customerstatus/' + id, customerStatus);
+  editStatus(id: string, customerStatus: CustomerStatus): Observable<CustomerStatus> {
+    return this.http.put<CustomerStatus>(this.baseUrl + 'customerstatuses/' + id, customerStatus);
   }
-  deleteStatus(id: number) {
-    return this.http.delete(this.baseUrl + 'customerstatus/' + id);
+  deleteStatus(id: string) {
+    return this.http.delete(this.baseUrl + 'customerstatuses/' + id);
   }
 }
