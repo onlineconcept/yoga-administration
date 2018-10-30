@@ -8,10 +8,13 @@ import { RegionService } from '../../_services/region.service';
 import { Region } from '../../_models/region';
 import { Service } from '../../_models/service';
 import { ServiceService } from '../../_services/service.service';
-import { FocusService } from 'src/_services/focus.service';
+import { FocusService } from '../../_services/focus.service';
 import { Focus } from '../../_models/focus';
 import { Offer } from '../../_models/offer';
 import { OfferService } from '../../_services/offer.service';
+import { Employeer } from '../../_models/employeer';
+import { EmployeerService } from '../../_services/employeer.service';
+import {Pagination, PaginatedResult} from '../../_models/pagination';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +28,8 @@ export class HomeComponent implements OnInit {
   services: Service[];
   focuses: Focus[];
   offers: Offer[];
+  employeers: Employeer[];
+  pagination: Pagination;
 
   showFilters = true;
   constructor(private customerStatusService: CustomerStatusService,
@@ -33,6 +38,7 @@ export class HomeComponent implements OnInit {
               private serviceService: ServiceService,
               private focusService: FocusService,
               private offerService: OfferService,
+              private employeerService: EmployeerService,
               private alertify: AlertifyService) { }
 
   ngOnInit() {
@@ -42,9 +48,16 @@ export class HomeComponent implements OnInit {
     this.loadServices();
     this.loadFocuses();
     this.loadOffers();
+    this.pagination = {
+      currentPage: 1,
+      itemsPerPage: 50,
+      totalItems: null,
+      totalPages: null
+    };
   }
   seachButton() {
     this.showFilters = false;
+    this.loadEmployeers();
   }
   loadCustomerStatuses() {
     this.customerStatusService.getStatuses().subscribe((res: CustomerStatus[]) => {
@@ -75,5 +88,16 @@ export class HomeComponent implements OnInit {
     this.offerService.getOffers().subscribe((res: Offer[]) => {
       this.offers = res;
     }, err => this.alertify.error(err));
+  }
+  loadEmployeers() {
+    this.employeerService.getEmployeers(this.pagination.currentPage, this.pagination.itemsPerPage)
+    .subscribe((res: PaginatedResult<Employeer[]>) => {
+      this.employeers = res.result;
+      this.pagination = res.pagination;
+    }, err => this.alertify.error(err));
+  }
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadEmployeers();
   }
 }
