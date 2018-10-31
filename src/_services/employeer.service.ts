@@ -12,13 +12,14 @@ export class EmployeerService {
   baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
-  getEmployeers(page?, itemsPerPage?): Observable<PaginatedResult<Employeer[]>> {
+  getEmployeers(page?, itemsPerPage?, status?): Observable<PaginatedResult<Employeer[]>> {
     const paginatedResult: PaginatedResult<Employeer[]> = new PaginatedResult<Employeer[]>();
     let params = new HttpParams();
     if (page != null && itemsPerPage != null) {
       params = params.append('pageNumber', page);
       params = params.append('pageSize', itemsPerPage);
     }
+
     return this.http.get<Employeer[]>(this.baseUrl + 'employeers', { observe: 'response', params})
     .pipe(
       map(response => {

@@ -15,6 +15,9 @@ import { OfferService } from '../../_services/offer.service';
 import { Employeer } from '../../_models/employeer';
 import { EmployeerService } from '../../_services/employeer.service';
 import {Pagination, PaginatedResult} from '../../_models/pagination';
+import { Status } from '../../_models/status';
+import { NgForm } from '@angular/forms';
+import { SearchForm } from '../../_models/search-form';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +33,7 @@ export class HomeComponent implements OnInit {
   offers: Offer[];
   employeers: Employeer[];
   pagination: Pagination;
+  userParams: SearchForm;
 
   showFilters = true;
   constructor(private customerStatusService: CustomerStatusService,
@@ -54,9 +58,24 @@ export class HomeComponent implements OnInit {
       totalItems: null,
       totalPages: null
     };
+    this.userParams = {
+        query: '',
+        statuses: {},
+        locations: {},
+        primary: {},
+        secondary: {}
+    };
   }
-  seachButton() {
+  seachButton(form: NgForm) {
     this.showFilters = false;
+    console.log(this.userParams);
+    console.log(this.customerStatuses);
+    console.log(this.categories);
+    console.log(this.regions);
+    console.log(this.services);
+    console.log(this.focuses);
+    console.log(this.offers);
+    console.log(this.employeers);
     this.loadEmployeers();
   }
   loadCustomerStatuses() {

@@ -3,4 +3,5 @@ export interface Region {
   name: string;
   zipBegin: number;
   zipEnd: number;
+  selected?: boolean;
 }

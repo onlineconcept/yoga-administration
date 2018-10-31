@@ -1,143 +1,157 @@
 <div>
-  <div *ngIf="showFilters">
-    <div class="form-group row">
-      <label for="inputEmail3" class="col-sm-2 col-form-label">Fritekst</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputEmail3" placeholder="Fritekst">
+  <form (ngSubmit)="seachButton()" #searchForm="ngForm">
+    <div *ngIf="showFilters">
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Fritekst</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="query" [(ngModel)]="userParams.query" placeholder="Fritekst">
+        </div>
       </div>
-    </div>
 
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label">Kundestatus</label>
-      <div class="col-sm-10">
-        <div class="form-check form-check-inline mt-2" *ngFor="let cs of customerStatuses">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" [value]="cs.id">
-          <label class="form-check-label fixed-label" for="inlineCheckbox1">{{cs.name}}</label>
-        </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Kundestatus</label>
+        <div class="col-sm-10">
+          <div class="form-check form-check-inline mt-2" *ngFor="let cs of customerStatuses">
+            <input class="form-check-input" type="checkbox" [name]="cs.id" [(ngModel)]="cs.selected" [value]="cs.id">
+            <label class="form-check-label fixed-label" for="inlineCheckbox1">{{cs.name}}</label>
+          </div>
 
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label">Services</label>
-      <div class="col-sm-10">
-        <div class="form-check form-check-inline mt-2" *ngFor="let s of services">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" [value]="s.id">
-          <label class="form-check-label fixed-label" for="inlineCheckbox1">{{s.name}}</label>
         </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Services</label>
+        <div class="col-sm-10">
+          <div class="form-check form-check-inline mt-2" *ngFor="let s of services">
+            <input class="form-check-input" type="checkbox" [name]="s.id" [(ngModel)]="s.selected" [value]="s.id">
+            <label class="form-check-label fixed-label" for="inlineCheckbox1">{{s.name}}</label>
+          </div>
 
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label">Kategori</label>
-      <div class="col-sm-10">
-        <div class="form-check form-check-inline mt-2" *ngFor="let c of categories">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" [value]="c.id">
-          <label class="form-check-label fixed-label" for="inlineCheckbox1">{{c.name}}</label>
         </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Kategori</label>
+        <div class="col-sm-10">
+          <div class="form-check form-check-inline mt-2" *ngFor="let c of categories">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="c.selected" [name]="c.id" [value]="c.id">
+            <label class="form-check-label fixed-label" for="inlineCheckbox1">{{c.name}}</label>
+          </div>
 
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label">Status</label>
-      <div class="col-sm-10">
-        <div class="form-check form-check-inline mt-2">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-          <label class="form-check-label fixed-label" for="inlineCheckbox1">Aktiv</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-          <label class="form-check-label fixed-label" for="inlineCheckbox2">Lukket</label>
         </div>
       </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label">Fokus</label>
-      <div class="col-sm-10">
-        <div class="form-check form-check-inline mt-2" *ngFor="let f of focuses">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" [value]="f.id">
-          <label class="form-check-label fixed-label" for="inlineCheckbox1">{{f.name}}</label>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Status</label>
+        <div class="col-sm-10">
+          <div class="form-check form-check-inline mt-2">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="userParams.statuses.open" name="statusopen"
+              value="open">
+            <label class="form-check-label fixed-label" for="inlineCheckbox1">Aktiv</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="userParams.statuses.closed" name="statusclosed"
+              value="closed">
+            <label class="form-check-label fixed-label" for="inlineCheckbox2">Lukket</label>
+          </div>
         </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Fokus</label>
+        <div class="col-sm-10">
+          <div class="form-check form-check-inline mt-2" *ngFor="let f of focuses">
+            <input class="form-check-input" type="checkbox" [name]="f.id" [(ngModel)]="f.selected" [value]="f.id">
+            <label class="form-check-label fixed-label" for="inlineCheckbox1">{{f.name}}</label>
+          </div>
 
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label">Tilbyder</label>
-      <div class="col-sm-10">
-        <div class="form-check form-check-inline mt-2" *ngFor="let o of offers">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" [value]="o.id">
-          <label class="form-check-label fixed-label" for="inlineCheckbox1">{{o.name}}</label>
         </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Tilbyder</label>
+        <div class="col-sm-10">
+          <div class="form-check form-check-inline mt-2" *ngFor="let o of offers">
+            <input class="form-check-input" type="checkbox" [name]="o.id" [(ngModel)]="o.selected" [value]="o.id">
+            <label class="form-check-label fixed-label" for="inlineCheckbox1">{{o.name}}</label>
+          </div>
 
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Region</label>
+        <div class="col-sm-10">
+          <div class="form-check form-check-inline mt-2" *ngFor="let r of regions">
+            <input class="form-check-input" type="checkbox" [name]="r.id" [(ngModel)]="r.selected" [value]="r.id">
+            <label class="form-check-label fixed-label" for="inlineCheckbox1">{{r.name}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Location</label>
+        <div class="col-sm-10">
+          <div class="form-check form-check-inline mt-2">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="userParams.locations.adress" name="locationadr"
+              value="address">
+            <label class="form-check-label fixed-label" for="inlineCheckbox1">Adresse</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="userParams.locations.facebook" name="locationfb"
+              value="facebook">
+            <label class="form-check-label fixed-label" for="inlineCheckbox2">Facebook</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="userParams.locations.web" name="locationweb"
+              value="web">
+            <label class="form-check-label fixed-label" for="inlineCheckbox3">Web</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Primær kontakt</label>
+        <div class="col-sm-10">
+          <div class="form-check form-check-inline mt-2">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="userParams.primary.name" name="primaryname"
+              value="name">
+            <label class="form-check-label fixed-label" for="inlineCheckbox1">Navn</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="userParams.primary.mail" name="primarymail"
+              value="mail">
+            <label class="form-check-label fixed-label" for="inlineCheckbox2">Mail</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="userParams.primary.phone" name="primaryphone"
+              value="phone">
+            <label class="form-check-label fixed-label" for="inlineCheckbox3">Mobil</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Sekundær kontaktperson</label>
+        <div class="col-sm-10">
+          <div class="form-check form-check-inline mt-2">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="userParams.secondary.name" name="secondaryname"
+              value="name">
+            <label class="form-check-label fixed-label" for="inlineCheckbox1">Navn</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="userParams.secondary.mail" name="secondarymail"
+              value="mail">
+            <label class="form-check-label fixed-label" for="inlineCheckbox2">Mail</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="userParams.secondary.phone" name="secondaryphone"
+              value="phone">
+            <label class="form-check-label fixed-label" for="inlineCheckbox3">Mobil</label>
+          </div>
+        </div>
       </div>
     </div>
     <div class="form-group row">
-      <label class="col-sm-2 col-form-label">Region</label>
       <div class="col-sm-10">
-        <div class="form-check form-check-inline mt-2" *ngFor="let r of regions">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" [value]="r.id">
-          <label class="form-check-label fixed-label" for="inlineCheckbox1">{{r.name}}</label>
-        </div>
+        <button type="submit" class="btn btn-primary" *ngIf="showFilters">Søg</button>
+        <button type="button" class="btn btn-primary" *ngIf="!showFilters" (click)="showFilters=true">Vis
+          søgefelter</button>
       </div>
     </div>
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label">Location</label>
-      <div class="col-sm-10">
-        <div class="form-check form-check-inline mt-2">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-          <label class="form-check-label fixed-label" for="inlineCheckbox1">Adresse</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-          <label class="form-check-label fixed-label" for="inlineCheckbox2">Facebook</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-          <label class="form-check-label fixed-label" for="inlineCheckbox3">Web</label>
-        </div>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label">Primær kontakt</label>
-      <div class="col-sm-10">
-        <div class="form-check form-check-inline mt-2">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-          <label class="form-check-label fixed-label" for="inlineCheckbox1">Navn</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-          <label class="form-check-label fixed-label" for="inlineCheckbox2">Mail</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-          <label class="form-check-label fixed-label" for="inlineCheckbox3">Mobil</label>
-        </div>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label">Sekundær kontaktperson</label>
-      <div class="col-sm-10">
-        <div class="form-check form-check-inline mt-2">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-          <label class="form-check-label fixed-label" for="inlineCheckbox1">Navn</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-          <label class="form-check-label fixed-label" for="inlineCheckbox2">Mail</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-          <label class="form-check-label fixed-label" for="inlineCheckbox3">Mobil</label>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-10">
-      <button type="submit" class="btn btn-primary" (click)="seachButton()" *ngIf="showFilters">Søg</button>
-      <button type="submit" class="btn btn-primary" *ngIf="!showFilters" (click)="showFilters=true">Vis
-        søgefelter</button>
-    </div>
-  </div>
+  </form>
+
 
 </div>
 <div *ngIf="!showFilters">

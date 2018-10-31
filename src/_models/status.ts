@@ -1,5 +1,4 @@
-export interface Offer {
-  id: string;
+export interface Status {
   name: string;
   selected?: boolean;
 }
