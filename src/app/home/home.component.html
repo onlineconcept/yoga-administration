@@ -154,8 +154,11 @@
 
 
 </div>
-<div *ngIf="!showFilters">
-  <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [(ngModel)]="pagination.currentPage"
+<div *ngIf="!showFilters && loading">
+  <img src="../../assets/ajax-loader.gif" alt="loading"/>
+</div>
+<div *ngIf="!showFilters && !loading">
+    <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [(ngModel)]="pagination.currentPage"
     [itemsPerPage]="pagination.itemsPerPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
     firstText="&laquo;" lastText="&raquo;"></pagination>
   <table class="table">
@@ -163,6 +166,8 @@
       <tr>
         <th scope="col">Navn</th>
         <th scope="col">Kundestatus</th>
+        <th scope="col">Web</th>
+        <th scope="col">Facebook</th>
         <th scope="col">Services</th>
         <th scope="col">Telefon</th>
         <th scope="col">Kontakt</th>
@@ -172,11 +177,14 @@
     <tbody>
       <tr *ngFor="let emp of employeers">
         <td>{{emp.name}}</td>
+        
+        <td>{{emp.customerStatus}}</td>
+        <td><a [href]="emp.facebook" *ngIf="emp.facebook" target="_blank">Facebook</a></td>
+        <td><a [href]="emp.website" *ngIf="emp.website" target="_blank">Website</a></td>
+        <td>{{emp.services}}</td>
+        <td>{{emp.phone}}</td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{emp.categories}}</td>
       </tr>
     </tbody>
     <tfoot>

@@ -18,6 +18,7 @@ import {Pagination, PaginatedResult} from '../../_models/pagination';
 import { Status } from '../../_models/status';
 import { NgForm } from '@angular/forms';
 import { SearchForm } from '../../_models/search-form';
+import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-home',
@@ -34,6 +35,7 @@ export class HomeComponent implements OnInit {
   employeers: Employeer[];
   pagination: Pagination;
   userParams: SearchForm;
+  loading: boolean;
 
   showFilters = true;
   constructor(private customerStatusService: CustomerStatusService,
@@ -68,14 +70,6 @@ export class HomeComponent implements OnInit {
   }
   seachButton(form: NgForm) {
     this.showFilters = false;
-    console.log(this.userParams);
-    console.log(this.customerStatuses);
-    console.log(this.categories);
-    console.log(this.regions);
-    console.log(this.services);
-    console.log(this.focuses);
-    console.log(this.offers);
-    console.log(this.employeers);
     this.loadEmployeers();
   }
   loadCustomerStatuses() {
@@ -109,14 +103,24 @@ export class HomeComponent implements OnInit {
     }, err => this.alertify.error(err));
   }
   loadEmployeers() {
-    this.employeerService.getEmployeers(this.pagination.currentPage, this.pagination.itemsPerPage)
-    .subscribe((res: PaginatedResult<Employeer[]>) => {
-      this.employeers = res.result;
-      this.pagination = res.pagination;
-    }, err => this.alertify.error(err));
+    if(!this.loading)
+    {
+      this.loading = true;
+      this.employeerService.getEmployeers(this.pagination.currentPage, this.pagination.itemsPerPage,this.customerStatuses,this.services, this.categories,this.regions, this.focuses,this.offers,this.userParams)
+      .subscribe((res: PaginatedResult<Employeer[]>) => {
+        console.log(res.pagination);
+        this.pagination = res.pagination;
+        this.employeers = res.result;
+        
+        this.loading = false;
+      }, err => this.alertify.error(err));
+    }
   }
   pageChanged(event: any): void {
-    this.pagination.currentPage = event.page;
-    this.loadEmployeers();
+    if(event.page !== this.pagination.currentPage)
+    {
+      this.pagination.currentPage = event.page;
+      this.loadEmployeers();
+    }
   }
 }

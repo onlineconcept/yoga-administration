@@ -13,4 +13,7 @@ export interface Employeer {
   isOpen: boolean;
   jobPage: string;
   customerStatus: string;
+  services:string;
+  facebook:string;
+  categories:string;
 }
